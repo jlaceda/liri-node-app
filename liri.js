@@ -38,23 +38,26 @@ if (command !== 'do-what-it-says')
   console.log(`parameter: ${parameter}`);
 }
 
-switch (command)
+function processCommand(command, parameter)
 {
-  case 'concert-this':
-    concertThis(parameter);
-    break;
-  case 'spotify-this-song':
-    spotifyThisSong(parameter);
-    break;
-  case 'movie-this':
-    movieThis(parameter);
-    break;
-  case 'do-what-it-says':
-    doWhatItSays();
-    break;
-  default:
-    console.error('unable to interpret command');
-    return;
+  switch (command)
+  {
+    case 'concert-this':
+      concertThis(parameter);
+      break;
+    case 'spotify-this-song':
+      spotifyThisSong(parameter);
+      break;
+    case 'movie-this':
+      movieThis(parameter);
+      break;
+    case 'do-what-it-says':
+      doWhatItSays();
+      break;
+    default:
+      console.error('unable to interpret command');
+      return;
+  }
 }
 
 function concertThis(parameter)
