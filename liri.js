@@ -60,15 +60,15 @@ function processCommand(command, parameter)
   }
 }
 
-function concertThis(parameter)
+function concertThis(artist)
 {
 }
 
-function spotifyThisSong(parameter)
+function spotifyThisSong(song)
 {
 }
 
-function movieThis(parameter)
+function movieThis(movie)
 {
 }
 
