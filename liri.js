@@ -1,6 +1,8 @@
 require("dotenv").config();
 const Spotify = require('node-spotify-api');
 const keys = require("./keys.js");
+const fs = require('fs');
+const rl = require('readline');
 const spotify = new Spotify(keys.spotify);
 
 // first, process user input
@@ -60,16 +62,22 @@ function processCommand(command, parameter)
   }
 }
 
+// actually process the command
+processCommand(command, parameter);
+
 function concertThis(artist)
 {
+  console.log(`doing concertThis on ${artist}`);
 }
 
 function spotifyThisSong(song)
 {
+  console.log(`doing spotifyThisSong on ${song}`);
 }
 
 function movieThis(movie)
 {
+  console.log(`doing movieThis on ${movie}`);
 }
 
 function doWhatItSays()
@@ -77,4 +85,16 @@ function doWhatItSays()
   // for each line of random.txt:
   //     parse command and parameter
   //     run processCommand(command, parameter)
+  
+  const reader = rl.createInterface({
+    input: fs.createReadStream('random.txt')
+  });
+
+  reader.on('line', (line) => {
+    let lineArr = line.split(`,`);
+    const command = lineArr[0];
+    // take the quotes out of the parameters
+    const parameter = lineArr[1].slice(1,-1);
+    processCommand(command, parameter);
+  });
 }
