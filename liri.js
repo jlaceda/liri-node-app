@@ -74,4 +74,7 @@ function movieThis(parameter)
 
 function doWhatItSays()
 {
+  // for each line of random.txt:
+  //     parse command and parameter
+  //     run processCommand(command, parameter)
 }
