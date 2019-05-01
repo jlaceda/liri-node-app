@@ -113,7 +113,40 @@ Album:        ${firstTrack.album.name}`);
 
 function movieThis(movie)
 {
+  if (movie.length === 0)
+  {
+    movie = "Mr. Nobody"
+  }
   console.log(`doing movieThis on ${movie}`);
+
+  // * Title of the movie.
+  // * Year the movie came out.
+  // * IMDB Rating of the movie.
+  // * Rotten Tomatoes Rating of the movie.
+  // * Country where the movie was produced.
+  // * Language of the movie.
+  // * Plot of the movie.
+  // * Actors in the movie.
+  
+  axios.get(`http://www.omdbapi.com/?t=${encodeURI(movie)}&apikey=${keys.omdbapi.apiKey}`)
+    .then((response) =>
+    {
+      response.data
+      console.log(`
+Title:       ${response.data.Title}
+Year:        ${response.data.Year}
+IMBD Rating: ${response.data.Ratings.filter(r => r.Source === 'Internet Movie Database')[0].Value}
+RT Rating:   ${response.data.Ratings.filter(r => r.Source === 'Rotten Tomatoes')[0].Value}
+Country:     ${response.data.Country}
+Language:    ${response.data.Language}
+Actors:      ${response.data.Actors}
+Plot:        ${response.data.Plot}`);
+    })
+    .catch((error) =>
+    {
+      console.log('error getting movie info', error);
+    });
+
 }
 
 function doWhatItSays()
