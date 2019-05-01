@@ -70,7 +70,7 @@ processCommand(command, parameter);
 function concertThis(artist)
 {
   console.log(`doing concertThis on ${artist}`);
-  axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
+  axios.get(`https://rest.bandsintown.com/artists/${encodeURI(artist)}/events?app_id=${keys.bandsintown.apiKey}`)
     .then((response) =>
     {
       response.data.forEach((concert) =>
