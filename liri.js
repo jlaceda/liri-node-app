@@ -1,5 +1,7 @@
 require("dotenv").config();
 const Spotify = require('node-spotify-api');
+const axios = require('axios');
+const moment = require('moment')
 const keys = require("./keys.js");
 const fs = require('fs');
 const rl = require('readline');
@@ -68,6 +70,21 @@ processCommand(command, parameter);
 function concertThis(artist)
 {
   console.log(`doing concertThis on ${artist}`);
+  axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
+    .then((response) =>
+    {
+      response.data.forEach((concert) =>
+      {
+        console.log(`
+Venue:   ${concert.venue.name}
+City:    ${concert.venue.city}, ${concert.venue.region||concert.venue.country}
+Date:    ${moment(concert.datetime).format('MM/DD/YYYY')}`);
+      })
+      .catch((error) =>
+      {
+        console.error('error getting concerts', error);
+      });
+    })
 }
 
 function spotifyThisSong(song)
