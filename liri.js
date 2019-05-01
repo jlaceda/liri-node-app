@@ -89,7 +89,26 @@ Date:    ${moment(concert.datetime).format('MM/DD/YYYY')}`);
 
 function spotifyThisSong(song)
 {
+  if (song.length === 0)
+  {
+    song = 'The Sign Ace of Base';
+  }
   console.log(`doing spotifyThisSong on ${song}`);
+  spotify
+    .search({ type: 'track', query: song })
+    .then((response) =>
+    {
+      const firstTrack = response.tracks.items[0];
+      console.log(`
+Artist:       ${firstTrack.artists[0].name}
+Song Name:    ${firstTrack.name}
+Preview Link: ${firstTrack.preview_url||firstTrack.external_urls.spotify}
+Album:        ${firstTrack.album.name}`);
+    })
+    .catch((error) =>
+    {
+      console.log('error getting song info', error);
+    });
 }
 
 function movieThis(movie)
