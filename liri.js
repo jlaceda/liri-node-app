@@ -79,13 +79,13 @@ function concertThis(artist)
 Venue:   ${concert.venue.name}
 City:    ${concert.venue.city}, ${concert.venue.region||concert.venue.country}
 Date:    ${moment(concert.datetime).format('MM/DD/YYYY')}`);
-      })
-      .catch((error) =>
-      {
-        console.error('error getting concerts', error);
       });
     })
-}
+    .catch((error) =>
+    {
+      console.error('error getting concerts', error);
+    });
+};
 
 function spotifyThisSong(song)
 {
