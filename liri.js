@@ -18,6 +18,7 @@ const validCommands = [
   'concert-this',
   'spotify-this-song',
   'movie-this',
+  'weather-here',
   'do-what-it-says'
 ];
 
@@ -54,6 +55,9 @@ function processCommand(command, parameter)
       break;
     case 'movie-this':
       movieThis(parameter);
+      break;
+    case 'weather-here':
+      weatherHere(parameter);
       break;
     case 'do-what-it-says':
       doWhatItSays();
@@ -147,6 +151,20 @@ Plot:        ${response.data.Plot}\n`);
       log('error getting movie info', error, '\n');
     });
 
+}
+
+function weatherHere(city)
+{
+  if (city.length === 0) {
+    city = 'seattle'
+  }
+  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)}&appid=${keys.openweather.apiKey}`)
+    .then(response => {
+      log(`The weather in ${response.data.name} is currently ${response.data.weather[0].description}.\n`)
+    })
+    .catch(err => {
+      log(`Error getting weather.`, err, '\n');
+    });
 }
 
 function doWhatItSays()

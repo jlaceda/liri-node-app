@@ -12,3 +12,7 @@ exports.bandsintown = {
 exports.omdbapi = {
   apiKey: process.env.OMBDAPI_KEY
 };
+
+exports.openweather = {
+  apiKey: process.env.OPENWEATHER_KEY
+};
