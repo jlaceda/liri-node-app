@@ -4,6 +4,17 @@ UW Coding Bootcamp Homework - LIRI BOT
 ## Purpose
 LIRI will search Spotify for songs, Bands in Town for concerts, OMDB for movies, and Open Weather Map for weather.
 
+## .env file 
+To use this app you need a `.env` file that contains API keys for the different services.
+For example:
+```
+SPOTIFY_ID= 
+SPOTIFY_SECRET= 
+BANDSINTOWN_KEY= 
+OMBDAPI_KEY= 
+OPENWEATHER_KEY= 
+```
+
 ## Commands
 ### `node liri spotify-this-song <song title>`
 
