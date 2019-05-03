@@ -32,7 +32,7 @@ if (validCommands.indexOf(command) === -1)
 }
 
 // at this point we have a legit command
-log(`command: ${command}\n`);
+//log(`command: ${command}\n`);
 
 // if command is not do-what-it-says
 // construct the parameter
@@ -40,7 +40,7 @@ let parameter;
 if (command !== 'do-what-it-says')
 {
   parameter = process.argv.slice(3).join(' ');
-  log(`parameter: ${parameter}\n`);
+  //log(`parameter: ${parameter}\n`);
 }
 
 function processCommand(command, parameter)
@@ -73,17 +73,15 @@ processCommand(command, parameter);
 
 function concertThis(artist)
 {
-  log(`doing concertThis on ${artist}\n`);
   axios.get(`https://rest.bandsintown.com/artists/${encodeURI(artist)}/events?app_id=${keys.bandsintown.apiKey}`)
     .then((response) =>
     {
-      response.data.forEach((concert) =>
-      {
-        log(`
+      // look at only the first concert
+      const concert = response.data[0];
+      log(`
 Venue:   ${concert.venue.name}
 City:    ${concert.venue.city}, ${concert.venue.region||concert.venue.country}
 Date:    ${moment(concert.datetime).format('MM/DD/YYYY')}\n`);
-      });
     })
     .catch((error) =>
     {
@@ -97,7 +95,6 @@ function spotifyThisSong(song)
   {
     song = 'The Sign Ace of Base';
   }
-  log(`doing spotifyThisSong on ${song}\n`);
   spotify
     .search({ type: 'track', query: song })
     .then((response) =>
@@ -121,16 +118,6 @@ function movieThis(movie)
   {
     movie = "Mr. Nobody"
   }
-  log(`doing movieThis on ${movie}\n`);
-
-  // * Title of the movie.
-  // * Year the movie came out.
-  // * IMDB Rating of the movie.
-  // * Rotten Tomatoes Rating of the movie.
-  // * Country where the movie was produced.
-  // * Language of the movie.
-  // * Plot of the movie.
-  // * Actors in the movie.
   
   axios.get(`http://www.omdbapi.com/?t=${encodeURI(movie)}&apikey=${keys.omdbapi.apiKey}`)
     .then((response) =>
@@ -160,7 +147,9 @@ function weatherHere(city)
   }
   axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)}&appid=${keys.openweather.apiKey}`)
     .then(response => {
-      log(`The weather in ${response.data.name} is currently ${response.data.weather[0].description}.\n`)
+      log(`
+The weather in ${response.data.name} is currently ${response.data.weather[0].description}.
+`)
     })
     .catch(err => {
       log(`Error getting weather.`, err, '\n');
