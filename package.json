@@ -4,7 +4,7 @@
   "description": "LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.",
   "main": "index.js",
   "dependencies": {
-    "axios": ">=0.18.1",
+    "axios": "^0.18.1",
     "dotenv": "^7.0.0",
     "moment": "^2.24.0",
     "node-spotify-api": "^1.1.1"
